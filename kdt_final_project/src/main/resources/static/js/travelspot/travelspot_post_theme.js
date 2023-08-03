@@ -58,8 +58,6 @@ $(document).ready(function() {
 			type: 'get',
 			success: function(placedto) {
 				$('div[class="result"]').html('<img class="images" src=' + placedto.image1 + '>');
-				$('div[class="result"]').append(`<div style="position:fixed; bottom:3%; right:-10%;">
-				<a href="#"><img src="../img/top.png" width="5%" height="5%"></a>`);
 			},
 			error: function() { }
 		});
@@ -155,10 +153,6 @@ $(document).ready(function() {
 				} if (dto.usefee != "null" && dto.usefee != null) {
 					$('div[class="result"]').append('<p class="pstyle">이용요금<br><hr class="hrdetail"><br>' + dto.usefee + '<br><br>');
 				}
-
-				//스크롤
-				$('div[class="result"]').append(`<div style="position:fixed; bottom:3%; right:-10%;">
-				<a href="#"><img src="../img/top.png" width="5%" height="5%"></a>`);
 			},
 			error: function() { }
 		});

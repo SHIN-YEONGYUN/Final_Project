@@ -17,9 +17,7 @@ $(document).ready(function() {
 				$('div[class="result"]').append('<div class="comments"></div>');
 				
 				getCommentList(); //저장된 댓글 불러오기
-				
-				$('div[class="result"]').append(`<div style="position:fixed; bottom:3%; right:-10%;">
-				<a href="#"><img src="../img/top.png" width="5%" height="5%"></a>`);
+			
 				
 				$('.savebutton').click(function() {
                 	var content = $('#content').val();
@@ -59,8 +57,7 @@ function imageAjax(){
 			type: 'get',
 			success: function(placedto) {
 				$('div[class="result"]').html('<img class="images" src='+placedto.image1+'>');	
-				$('div[class="result"]').append(`<div style="position:fixed; bottom:3%; right:-10%;">
-				<a href="#"><img src="../img/top.png" width="5%" height="5%"></a>`);
+				
 			},
 			error: function() { }
 		});

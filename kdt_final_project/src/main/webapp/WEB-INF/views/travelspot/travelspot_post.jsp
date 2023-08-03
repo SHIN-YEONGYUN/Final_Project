@@ -19,7 +19,8 @@
 <script src="/js/travelspot/travelspot_comment.js"></script>
 
 <link href="/css/travelspot/import.css" rel="stylesheet" type="text/css"/>
-
+<script src="/js/weather_modal.js"></script>
+<link rel="stylesheet" href="/css/home/weather(modal).css">
 </head>
 <body>
 <%@ include file="../home/header.jsp"%>
@@ -40,16 +41,53 @@
 </div>
 <hr class="hrmargin">
 
-<div class="weather" style="float:right;"></div><!-- 날씨 들어갈 자리 -->
+<!-- 날씨 -->
+<button id="btn-modal">
+<div id="weather" style="position: absolute; top:50%; right : 5%; float:right">
+<img id="imgsrc" src="">
+<div class="city" style="font-size : 0.6vw;display: inline-box;"></div>
+<div style="font-size : 0.6vw; display: inline-box;" class="current_temp" ></div>
+</div>
+</button>
+<div id="modal" class="modal-overlay" style="z-index: 1;">
+
+        <div class="modal-window">
+            <div class="title">
+                <h2>weather</h2>
+            </div>
+            <div class="close-area">X</div><br><br>
+            
+            <div class="content">
+            
+            <div  style="text-align: center"><img id="imgsrcd" src=""  style="width:30%;"></div>
+            
+            <div style="padding-top: 20%">
+    		<div style="float : right; margin : -20px 10px 30px 130px; font-size : 11pt">
+            <div class="temp_min"></div>
+            <div class="temp_max"></div>
+            <div class="humidity"></div>
+            <div class="wind"></div>
+            <div class="cloud"></div>
+            </div>
+   			</div>
+    <div style="float : right; margin-top : -10%;">
+        <div class="city" style="font-size : 13pt"></div>
+        <div class="current_temp" style="font-size : 50pt"></div>
+        <div class="weather_description" style="font-size : 20pt"></div>
+    </div>
+                
+            </div>
+        </div>
+    </div>
+
+
 <div class="result"> </div><!-- ajax 이용 결과물 출력하는 곳 -->
 
-<div style="position:fixed; bottom:3%; right:-10%;">
-<a href="#"><img src="../img/top.png" width="5%" height="5%"></a></div>
-<div style="position: fixed; bottom: 10%; right:-18%;">
+<div class="parent">
+<a href="#"><img src="../img/top.png" width="5%" height="5%"></a>
 <a href="#" onclick="location.href = document.referrer;"><img src="../img/prev.png" width="5%" height="5%"></a>
-<!-- location.href = document.referrer; 뒤로가기 후 새로고침이 필요할때 사용 -->
 </div>
-
+<!-- location.href = document.referrer; 뒤로가기 후 새로고침이 필요할때 사용 -->
 
 <%@ include file="../home/footer.jsp"%>
 

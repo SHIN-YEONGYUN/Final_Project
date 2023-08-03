@@ -419,3 +419,13 @@ select::-ms-expand {
 	background-color: white;
 	
 }
+
+
+  .parent {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: fixed;
+      bottom: 5%;
+      right: -10vw; /*조정필요*/
+    }

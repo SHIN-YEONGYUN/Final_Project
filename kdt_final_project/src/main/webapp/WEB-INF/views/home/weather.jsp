@@ -74,7 +74,7 @@ navigator.geolocation.getCurrentPosition(function(pos) {
     //console.log(pos);
     var latitude = pos.coords.latitude;//위도
     var longitude = pos.coords.longitude;//경도
-    alert("현재 위치는 : " + latitude + ", "+ longitude);
+    //alert("현재 위치는 : " + latitude + ", "+ longitude);
     var apiURI = "http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid="+"487c6b16cacfbb98c9f1f5b9790f3b71";
     $.ajax({
         url: apiURI,
