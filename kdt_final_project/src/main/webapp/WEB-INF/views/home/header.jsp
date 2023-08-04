@@ -60,7 +60,7 @@ if (login==null){%>
 
 
 <a href="/"><img src=../img/logo.png class="logo" ></a>
-<a href="/travelspot/list"><div class="menu" >추천여행지</div></a>
+<a href="/travelspot/list"><div class="menu" >추천지</div></a>
 <a href="/community"><div class="menu" >커뮤니티</div></a>
 <%if(login==null) {%>
 <a href="/login"><div class="menu" >마이페이지</div></a>
