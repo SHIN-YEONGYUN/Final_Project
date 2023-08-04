@@ -427,5 +427,5 @@ select::-ms-expand {
       justify-content: center;
       position: fixed;
       bottom: 5%;
-      right: -10vw; /*조정필요*/
+      right: -25vw; /*조정필요*/
     }

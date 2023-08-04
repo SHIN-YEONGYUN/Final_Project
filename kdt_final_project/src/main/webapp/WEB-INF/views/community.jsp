@@ -42,7 +42,7 @@
     
     
 	<article id="record" class="on">
-		<ol class="topTen">
+		<%-- <ol class="topTen">
 			<c:forEach items="${top10List}" var="board">
 				<c:if test="${board.board_title == '여행기록' }">
 					<li id="top${board.id}">
@@ -60,7 +60,7 @@
 					</li>
 				</c:if>
 			</c:forEach>
-		</ol>
+		</ol> --%>
 		<table>
 			<thead>			
 				<tr>

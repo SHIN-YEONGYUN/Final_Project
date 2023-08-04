@@ -69,7 +69,7 @@ $(document).ready(function() {
 			type: 'get',
 			success: function(placeDTO) {
 				//지도 
-				$('div[class="result"]').html('<div id="map" style="width:100%; height:400px;"></div><br>');
+				$('div[class="result"]').html('<div id="map" style="width:100%; height:400px; z-index:-10"></div><br>');
 
 				var mapx = placeDTO.mapx; //위도
 				var mapy = placeDTO.mapy; //경도
