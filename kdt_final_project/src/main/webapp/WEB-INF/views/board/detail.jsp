@@ -23,7 +23,9 @@
     <h2>${board.title}</h2>
     <div id="infocontainer">
     	<div class="info">    
-    		<div id="profile"></div>
+    		<div id="profile">
+				<img id="profileImage" src="/img/profile/profileimg.png" alt="프로필 사진">
+			</div>
     		<span>${board.writer}</span>
     		<span>조회수: ${board.views}</span>
     		<span>좋아요: ${board.likecount}</span>    
@@ -50,11 +52,15 @@
     		this.classList.toggle("likeon");
     	}); */
     	
+    	const boardId = ${board.id};
+    	//console.log(boardId);
+    	
     	// 좋아요 상태를 확인하고 로그인 상태를 체크하는 함수
         function checkLoginAndHandleLike(boardId) {
             $.ajax({
-                url: "/api/getLikeStatus?boardId=" + boardId,
+                url: "/api/getLikeStatus",
                 method: "GET",
+                data: {"boardId": boardId},
                 success: function(response) {
                     if (response.isLoggedIn) {
                         // 로그인 상태인 경우 좋아요 처리 수행
@@ -73,17 +79,25 @@
         // 좋아요 처리 함수
         function toggleLike(boardId) {
             $.ajax({
-                url: "/toggleLike?boardId=" + boardId,
-                method: "POST",
+                url: "/toggleLike",
+                method: "GET",
+                data: {"boardId": boardId},
                 success: function(response) {
                     // 성공적으로 처리되었을 때의 로직
                     // 예: 버튼 색 변경, 좋아요 수 갱신 등
+                    const likebtn = document.querySelector(".likebtn");
+    				/* likebtn.addEventListener('click',function(){
+    				this.classList.toggle("likeon");
+    				}); */
+                    
                     if (response.likeStatus === "liked") {
                         $("#likeButton").text("좋아요 취소");
                     } else {
                         $("#likeButton").text("좋아요");
+                        likebtn.classList.toggle("likeon");
                     }
                     $("#likeCount").text("좋아요 수: " + response.likeCount);
+                    
                 },
                 error: function() {
                     alert("서버와 통신 중 오류가 발생했습니다.");
@@ -102,8 +116,37 @@
 	</div>
 	<div class="comments"></div>
 </section>
-<%@ include file="../../views/home/footer.jsp"%>
+
 <div style="position:fixed; bottom:1%; right:1%;">
 <a href="#"><img src="../img/top.png" width="20px" height="20px"></a>
+<script>
+function fetchProfilePhoto(writer) {
+  $.ajax({
+    url: '/getUserProfilePhoto', // 프로필 사진을 가져올 컨트롤러 경로
+    type: 'GET',
+    data: { writer: writer },
+    success: function(data) {
+      // 성공적으로 데이터를 가져왔을 때 처리하는 부분
+      updateProfilePhoto(data);
+    },
+    error: function() {
+      // 데이터를 가져오지 못했을 때 처리하는 부분
+      console.error('프로필 사진을 가져오지 못했습니다.');
+    }
+  });
+}
+
+function updateProfilePhoto(photoUrl) {
+  // 가져온 URL을 이용하여 이미지 엘리먼트를 업데이트
+  const profileImage = document.getElementById('profileImage');
+  profileImage.src = photoUrl;
+}
+
+// 페이지 로드 시 프로필 사진 가져오기
+$(document).ready(function() {
+  const writer = '${board.writer}'; // JSP 내의 작성자 변수 사용
+  fetchProfilePhoto(writer);
+});
+</script>
 </body>
 </html>

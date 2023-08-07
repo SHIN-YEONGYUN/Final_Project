@@ -57,7 +57,7 @@
 <!-- 개선사항 -->
 <!-- 버튼: 좋아요 (신고버튼) -->
 
-<%@ include file="../home/footer.jsp"%>
+
 
 </body>
 </html>

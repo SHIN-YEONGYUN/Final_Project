@@ -145,6 +145,7 @@ public class UserDTO {
 		this.photo = photo;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "UserDTO [id=" + id + ", nickname=" + nickname + ", username=" + username + ", userpw=" + userpw

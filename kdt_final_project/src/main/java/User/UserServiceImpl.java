@@ -144,6 +144,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+	//게시판 작성자 프로필
+	@Override
+    public String getProfilePhotoByWriter(String writer) {
+        UserDTO user = dao.getUserByNickname(writer);
+        String photoUrl = user.getPhoto();
+
+        // 만약 프로필 사진이 null이라면 기본 이미지 URL을 반환
+        if (photoUrl == null) {
+            // 기본 이미지 URL을 반환하는 경로
+            return "/img/profile/profileimg.png";
+        }
+
+        return photoUrl;
+    }
 	
 
 }

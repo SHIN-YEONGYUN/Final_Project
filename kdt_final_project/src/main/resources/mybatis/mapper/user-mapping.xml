@@ -175,5 +175,15 @@
 		<result property="contentId" column="contentId" />
 		<result property="boardId" column="boardId" />
 	</resultMap>
-
+	
+	<!-- 게시판 작성자 프로필 -->
+	<select id="getProfilePhotoByWriter" resultType="java.lang.String">
+        SELECT photo FROM users WHERE nickname = #{writer}
+    </select>
+    
+    <!-- 닉네임을 기준으로 유저 정보를 조회하는 쿼리 -->
+    <select id="getUserByNickname" resultType="UserDTO">
+        SELECT * FROM users WHERE nickname = #{nickname}
+    </select>
+    
 </mapper>

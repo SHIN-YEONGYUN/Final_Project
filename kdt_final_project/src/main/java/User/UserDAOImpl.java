@@ -134,8 +134,24 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	
+	//게시판 작성자 프로필
+	@Override
+    public String getProfilePhotoByWriter(String writer) {
+        UserDTO user = sqlSession.selectOne("getProfilePhotoByWriter", writer);
+        String photoUrl = user.getPhoto();
 
+        // 만약 프로필 사진이 null이라면 기본 이미지 URL을 반환
+        if (photoUrl == null) {
+            photoUrl = "/img/profile/profileimg.png";
+        }
+
+        return photoUrl;
+    }
 	
+	@Override
+    public UserDTO getUserByNickname(String nickname) {
+        return sqlSession.selectOne("getUserByNickname", nickname);
+    }
 
 	
 	

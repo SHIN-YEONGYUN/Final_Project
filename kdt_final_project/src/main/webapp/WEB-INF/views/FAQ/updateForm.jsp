@@ -100,7 +100,7 @@
 	<%@ include file="../home/topbutton.jsp"%>
 
 	<!-- footer -->
-	<%@ include file="../home/footer.jsp"%>
+	
 
 
 

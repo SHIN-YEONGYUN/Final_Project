@@ -48,7 +48,8 @@ $(document).ready(function() {
 					<div class="comments-userinfo">
 					<p style="font-weight: bold; display: inline;">&nbsp;${map.commentsList[i].writer}&nbsp;</p><p style="display: inline;"> ${map.commentsList[i].writingtime}</p> ` +
 						(map.userdto == map.commentsList[i].writer ?
-							`<input class="deletebutton" type="button" value="삭제" id="${map.commentsList[i].id}"><input class="modifybutton" type="button" value="수정" id="${map.commentsList[i].id}">` : '')
+							`<input class="deletebutton" type="button" value="삭제" id="${map.commentsList[i].id}">
+							<input class="modifybutton" type="button" value="수정" id="${map.commentsList[i].id}">` : '')
 						+ ((map.userdto == map.commentsList[i].writer) ? `</div>` : `<input class="reportbutton" type="button" value="신고" id="${map.commentsList[i].id}"></div>`)
 						+ `<p id="comment_contents" >${map.commentsList[i].contents}</p>`);
 

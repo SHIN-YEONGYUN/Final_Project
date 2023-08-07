@@ -1,5 +1,7 @@
 package community;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,18 +15,23 @@ public class LikeDAOImpl implements LikeDAO {
     private SqlSession sqlSession;
 
     @Override
-    public LikesDTO getLikeByUserAndBoard(int user_id, int board_id) {
-        return sqlSession.selectOne("getLikeByUserAndBoard", new LikesDTO(user_id, 0, 0, 0, board_id));
+    public LikesDTO getLikeByUserAndBoard(HashMap<String, Integer> param) {
+        return sqlSession.selectOne("getLikeByUserAndBoard", new LikesDTO(param.get("user_id"), 0, 0, 0, param.get("board_id")));
     }
 
     @Override
-    public void insertLikes(LikesDTO like) {
-        sqlSession.insert("insertLikes", like);
+    public void createLikes(User.LikesDTO like) {
+        sqlSession.insert("createLikes", like);
     }
 
     @Override
-    public void cancelLikes(LikesDTO like) {
+    public void cancelLikes(User.LikesDTO like) {
         sqlSession.update("cancelLikes", like);
     }
+
+	@Override
+	public int getLikesCount(int board_id) {
+		return sqlSession.selectOne("getLikesCount", board_id);
+	}
 }
 

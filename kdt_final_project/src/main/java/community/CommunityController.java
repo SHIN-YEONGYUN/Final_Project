@@ -262,46 +262,65 @@ public class CommunityController {
 	// 좋아요 상태를 확인하는 API
 	@GetMapping("/api/getLikeStatus")
 	@ResponseBody
-	public Map<String, String> getLikeStatus(@RequestParam("boardId") int boardId, HttpServletRequest request) {
-		Map<String, String> response = new HashMap<>();
+	public Map<String, Object> getLikeStatus(@RequestParam("boardId") int boardId, HttpServletRequest request) {
+		//이 메서드 목표와 detail.jsp 내 checkLoginAndHandleLike 목표와 다름 -> 로그인여부 처리로 변경
+		//확인용: System.out.println("게시판 번호: "+boardId);
+		
+		Map<String, Object> response = new HashMap<>();
 		UserDTO user = (UserDTO) request.getSession().getAttribute("user");
 		if (user == null) {
-			response.put("likeStatus", "unliked");
+			//response.put("likeStatus", "unliked");
+			response.put("isLoggedIn", false);
 		} else {
-			LikesDTO like = likeService.getLikeByUserAndBoard(user.getId(), boardId);
-			if (like == null || like.getLike_check() == 0) {
-				response.put("likeStatus", "unliked");
-			} else {
-				response.put("likeStatus", "liked");
-			}
+			//LikesDTO like = likeService.getLikeByUserAndBoard(user.getId(), boardId);
+			response.put("isLoggedIn", true);
+			//if (like == null || like.getLike_check() == 0) {
+			//	response.put("likeStatus", "unliked");
+			//} else {
+			//	response.put("likeStatus", "liked");
+			//}
 		}
 		return response;
 	}
 
 	// 좋아요 버튼 클릭 시 처리
-	@RequestMapping("/toggleLike")
+	@GetMapping("/toggleLike")
 	@ResponseBody
-	public Map<String, Object> toggleLike(HttpServletRequest request) {
-		Map<String, Object> response = new HashMap<>();
+	public Map<String, Object> toggleLike(@RequestParam("boardId") int board_id, HttpServletRequest request) {
+		System.out.println("확인용: "+board_id );
 		UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+		int user_id = user.getId();
+		System.out.println(user_id);
+		
+		Map<String, Object> response = new HashMap<>();
+		HashMap<String, Integer> param = new HashMap<>();
+		param.put("board_id", board_id);
+		param.put("user_id", user_id);
+
+		/* 로그인 여부 체크 불필요 -> getLikeStatus에서 이미 로그인 안되었을경우 로그인페이지로 강제이동시킴
 		if (user == null) {
-			// 로그인되어 있지 않은 경우
-			response.put("isLoggedIn", false);
-		} else {
-			// 로그인되어 있는 경우
-			int userId = user.getId();
-			int boardId = Integer.parseInt(request.getParameter("boardId"));
-			LikesDTO like = likeService.getLikeByUserAndBoard(userId, boardId);
+		 //로그인되어 있지 않은 경우
+		 response.put("isLoggedIn", false);
+		 } else {
+		 //로그인되어 있는 경우
+		 int userId = user.getId();
+		}
+		*/
+			LikesDTO like = likeService.getLikeByUserAndBoard(param);
+			
 			if (like == null) {
 				// 해당 게시글에 좋아요를 누른 적이 없는 경우
-				likeService.createLike(userId, boardId);
+				likeService.createLike(user_id, board_id);
 				response.put("likeStatus", "liked");
 			} else {
 				// 이미 해당 게시글에 좋아요를 누른 경우
 				likeService.deleteLike(like);
 				response.put("likeStatus", "unliked");
 			}
-		}
+			//좋아요수 response에 put하지 않았으므로 detail.jsp에서 response.likeCount 사용불가
+			//좋아요 수 쿼리 추가 후 response에 좋아요 수 넣기
+			response.put("likeCount", likeService.getLikesCount(board_id));
+			
 		return response;
 	}
 

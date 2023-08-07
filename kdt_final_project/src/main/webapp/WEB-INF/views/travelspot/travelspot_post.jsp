@@ -49,7 +49,7 @@
 <div style="font-size : 0.6vw; display: inline-box;" class="current_temp" ></div>
 </div>
 </button>
-<div id="modal" class="modal-overlay" style="z-index: 1;">
+<div id="modal" class="modal-overlay" style="z-index: 9999;">
 
         <div class="modal-window">
             <div class="title">
@@ -89,7 +89,7 @@
 </div>
 <!-- location.href = document.referrer; 뒤로가기 후 새로고침이 필요할때 사용 -->
 
-<%@ include file="../home/footer.jsp"%>
+
 
 </body>
 </html>

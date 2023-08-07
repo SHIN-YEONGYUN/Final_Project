@@ -187,13 +187,14 @@ function modifyComment(){ //댓글 수정 기능
 	});//modifybutton end
 }//modifyComment end
 
-	//마이페이지 댓글창 이동
+//마이페이지 댓글창 이동	
 	var referrer = document.referrer;
 	console.log("이전 페이지 URL: "+referrer);
-	if(referrer == "/travelspot/list" || referrer == "/travelspot/list_theme"){//기본페이지: 사진모아보기로 설정
-		imageAjax(); 
-	} else if(referrer == "/mypage") {	//이전페이지가 마이페이지이면 댓글버튼 클릭이벤트 강제 실행
+	//stringVal.indexOf(substring) !== -1;
+	if(referrer.indexOf("/mypage")!== -1 ) {	//이전페이지가 마이페이지이면 댓글버튼 클릭이벤트 강제 실행
 		$("#comments").trigger("click");
+	} else {
+		imageAjax(); //기본페이지: 사진모아보기로 설정
 	}
 
 });//ready end

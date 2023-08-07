@@ -4,8 +4,6 @@ $(document).ready(function() {
 	let urlParams = new URL(location.href).searchParams;
 	let contentId = urlParams.get('contentId');
 
-	imageAjax(); //기본페이지: 사진모아보기로 설정
-
 	$('#images').click(function() {
 		imageAjax();
 	});//image onclick end
@@ -69,7 +67,7 @@ $(document).ready(function() {
 			type: 'get',
 			success: function(placeContentsDTO) {
 				//지도 
-				$('div[class="result"]').html('<div id="map" style="width:100%; height:400px; z-index:-10"></div><br>');
+				$('div[class="result"]').html('<div id="map" style="width:100%; height:400px;"></div><br>');
 
 				var mapx = placeContentsDTO.mapx; //위도
 				var mapy = placeContentsDTO.mapy; //경도

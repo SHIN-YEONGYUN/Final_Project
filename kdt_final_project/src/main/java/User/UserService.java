@@ -44,4 +44,7 @@ public interface UserService {
     List<ReportDTO> getAllReportBoardList();
     List<ReportDTO> getAllReportCommentList();
 
+    //게시판 작성자 프로필
+    String getProfilePhotoByWriter(String writer);
+    
 }

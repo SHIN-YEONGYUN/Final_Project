@@ -50,7 +50,7 @@ $(document).ready(function() {
 </div>
 </div>
 </form>
-<%@ include file="../home/footer.jsp"%>
+
 
 </body>
 </html>

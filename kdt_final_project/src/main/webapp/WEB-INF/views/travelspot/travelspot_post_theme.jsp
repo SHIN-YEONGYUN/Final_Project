@@ -45,7 +45,7 @@
 <a href="#" onclick="location.href = document.referrer;"><img src="../img/prev.png" width="5%" height="5%"></a>
 </div>
 
-<%@ include file="../home/footer.jsp"%>
+
 
 </body>
 </html>

@@ -99,7 +99,7 @@
 
 
 	<!-- 좋아요 테이블 정보 저장: 좋아요 상태 1, 아닌 상태 0 -->
-	<insert id="insertLikes" parameterType="User.LikesDTO">
+	<insert id="createLikes" parameterType="User.LikesDTO">
 		INSERT INTO likes (user_id, board_id, like_check)
 		VALUES (#{user_id}, #{board_id}, 1)
 	</insert>
@@ -110,14 +110,17 @@
 		WHERE user_id = #{user_id} AND board_id = #{board_id}
 	</update>
 
-	<select id="getLikeByUserAndBoard" parameterType="map"
+	<select id="getLikeByUserAndBoard" parameterType="hashmap"
 		resultType="User.LikesDTO">
 		SELECT *
 		FROM likes
-		WHERE user_id = #{userId} AND board_id = #{boardId}
+		WHERE user_id = #{user_id} AND board_id = #{board_id}
 	</select>
 
-
+	<select id="getLikesCount" parameterType="int" resultType="int" >
+		select count(like_check) from likes where board_id=#{board_id};
+	</select>
+	
 	<select id="selectByUserId" parameterType="int">
 		SELECT userId
 		FROM

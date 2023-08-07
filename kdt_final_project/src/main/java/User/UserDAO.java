@@ -40,4 +40,10 @@ public interface UserDAO {
     
     List<ReportDTO> getAllReportBoardList();
     List<ReportDTO> getAllReportCommentList();
+    
+    
+    //게시판 작성자 프로필
+    String getProfilePhotoByWriter(String writer);
+    UserDTO getUserByNickname(String nickname);
+
 }

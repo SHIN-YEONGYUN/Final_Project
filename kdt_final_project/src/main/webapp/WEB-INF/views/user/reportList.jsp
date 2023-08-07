@@ -84,7 +84,7 @@
 		</div>
 	</div>
 
-	<%@ include file="../home/footer.jsp"%>
+	
 
 	<script>
 		function previewProfileImage(event) {

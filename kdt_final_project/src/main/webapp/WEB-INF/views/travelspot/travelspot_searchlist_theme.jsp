@@ -139,7 +139,7 @@
 	<div style="position: fixed; bottom: 1%; right: 1%;">
 		<a href="#"><img src="../img/top.png" width="20px" height="20px"></a>
 	</div>
-	<%@ include file="../home/footer.jsp"%>
+	
 
 </body>
 </html>

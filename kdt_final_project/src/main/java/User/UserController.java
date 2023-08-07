@@ -313,5 +313,12 @@ public class UserController {
         return new ResponseEntity<>(reportCommentList, HttpStatus.OK);
     }
 
+    
+    //게시판 작성자 프로필
+    @GetMapping("/getUserProfilePhoto")
+    public ResponseEntity<String> getUserProfilePhoto(@RequestParam("writer") String writer) {
+        String photoUrl = service.getProfilePhotoByWriter(writer);
+        return ResponseEntity.ok(photoUrl);
+    }
 
 }
