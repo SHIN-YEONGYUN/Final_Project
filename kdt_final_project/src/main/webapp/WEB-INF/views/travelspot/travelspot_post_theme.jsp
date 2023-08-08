@@ -15,7 +15,8 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a02700d6a520b1b4d23a9886f1160e0&libraries=services"></script>
 
 <link href="/css/travelspot/import.css" rel="stylesheet" type="text/css"/>
-
+<script src="/js/weather_modal.js"></script>
+<link rel="stylesheet" href="/css/home/weather(modal).css">
 </head>
 <body>
 <%@ include file="../home/header.jsp"%>
@@ -37,7 +38,45 @@
 </div>
 <hr class="hrmargin">
 
-<div class="weather" style="float:right;"></div><!-- 날씨 들어갈 자리 -->
+
+<!-- 날씨 -->
+<button id="btn-modal">
+<div id="weather" style="position: absolute; top:50%; right : 5%; float:right">
+<img id="imgsrc" src="">
+<div class="city" style="font-size : 0.6vw;display: inline-box;"></div>
+<div style="font-size : 0.6vw; display: inline-box;" class="current_temp" ></div>
+</div>
+</button>
+<div id="modal" class="modal-overlay" style="z-index: 9999;">
+
+        <div class="modal-window">
+            <div class="title">
+                <h2>weather</h2>
+            </div>
+            <div class="close-area">X</div><br><br>
+            
+            <div class="content">
+            
+            <div  style="text-align: center"><img id="imgsrcd" src=""  style="width:30%;"></div>
+            
+            <div style="padding-top: 20%">
+    		<div style="float : right; margin : -20px 10px 30px 130px; font-size : 11pt">
+            <div class="temp_min"></div>
+            <div class="temp_max"></div>
+            <div class="humidity"></div>
+            <div class="wind"></div>
+            <div class="cloud"></div>
+            </div>
+   			</div>
+    <div style="float : left; margin-top : -40%;">
+        <div class="city" style="font-size : 13pt"></div>
+        <div class="current_temp" style="font-size : 50pt"></div>
+        <div class="weather_description" style="font-size : 20pt"></div>
+    </div>
+                 
+            </div>
+        </div>
+    </div>
 <div class="result"> </div><!-- ajax 이용 결과물 출력하는 곳 -->
 
 <div class="parent">

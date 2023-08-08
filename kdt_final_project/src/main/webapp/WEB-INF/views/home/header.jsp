@@ -16,7 +16,7 @@
 	function googleTranslateElementInit() {
 		new google.translate.TranslateElement({
 			pageLanguage: 'ko',
-			includedLanguages: 'ko,en',
+			includedLanguages: 'ko,en,ja,fr,es,it,zh-CN,zh-TW,pt,de',
 			//layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
 			autoDisplay: false
 		}, 'google_translate_element');
@@ -39,7 +39,7 @@ if (login==null){%>
 <div class="name">
 <a href="/login" id="headerLoginBtn">로그인</a>
 <a href="/signin" id="headerSignupBtn">회원가입</a>
-<a href="/index(Eng)">English</a>
+<!-- <a href="/index(Eng)">English</a> -->
 </div>
 <%}else if (login!=null && bool==0){%>
 <div class="name">
@@ -47,7 +47,7 @@ if (login==null){%>
 <a href="/mypage"><%=username %>님</a>
 <a href="/logout" id="headerLoginBtn">로그아웃</a>
 <!-- <a href="/signin" id="headerSignupBtn">회원가입</a> -->
-<a href="/index(Eng)">English</a>
+<!-- <a href="/index(Eng)">English</a> -->
 </div>
 <%};%>
 

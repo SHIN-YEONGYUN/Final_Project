@@ -15,6 +15,7 @@
 	<!-- 모든 Board 목록 가져오기 -->
 	<select id="getAllBoards" resultType="boarddto">
 		SELECT * FROM board
+		<!-- ORDER BY likecount DESC -->
 	</select>
 
 	<!-- Top 10 Board 목록 가져오기 -->
@@ -99,27 +100,50 @@
 
 
 	<!-- 좋아요 테이블 정보 저장: 좋아요 상태 1, 아닌 상태 0 -->
-	<insert id="createLikes" parameterType="User.LikesDTO">
+	<insert id="createLikes" parameterType="community.LikeDTO">
 		INSERT INTO likes (user_id, board_id, like_check)
 		VALUES (#{user_id}, #{board_id}, 1)
 	</insert>
 
-	<update id="cancelLikes" parameterType="User.LikesDTO">
+	<update id="cancelLikes2" parameterType="community.LikeDTO">
 		UPDATE likes
 		SET like_check = 0
 		WHERE user_id = #{user_id} AND board_id = #{board_id}
 	</update>
+	
+	<update id="reLikes" parameterType="community.LikeDTO">
+		UPDATE likes
+		SET like_check = 1
+		WHERE user_id = #{user_id} AND board_id = #{board_id}
+	</update>
 
 	<select id="getLikeByUserAndBoard" parameterType="hashmap"
-		resultType="User.LikesDTO">
+		resultType="community.LikeDTO">
 		SELECT *
 		FROM likes
 		WHERE user_id = #{user_id} AND board_id = #{board_id}
 	</select>
 
 	<select id="getLikesCount" parameterType="int" resultType="int" >
-		select count(like_check) from likes where board_id=#{board_id};
+		select count(likecount) from board where id=#{board_id}
 	</select>
+
+	
+	<update id="addBoardLikes" parameterType="int">
+		update board set likecount = likecount+1 where id
+	</update>
+	
+	<update id="increaseLikeCount" parameterType="int">
+		UPDATE board
+		SET likecount = likecount + 1
+		WHERE id = #{boardId}
+	</update>
+	<update id="decreaseLikeCount" parameterType="int">
+		UPDATE board
+		SET likecount = likecount - 1
+		WHERE id = #{boardId}
+	</update>
+	
 	
 	<select id="selectByUserId" parameterType="int">
 		SELECT userId

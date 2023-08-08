@@ -5,7 +5,13 @@ public class BoardDTO {
 	int id;
 	String title, contents, writingtime;
 	int views, likecount;
-	String board_title, writer, place,categories;
+	String board_title, writer, place,categories, answer;
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 	public int getId() {
 		return id;
 	}

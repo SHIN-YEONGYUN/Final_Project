@@ -61,5 +61,10 @@ public class APIControllerTest {
 		apiServiceImpl.getThemePlaceDetail(contentId);
 		return "ok";
 	}
-
+	
+	@PostMapping("/api/themeplace")
+	public String apiTestPlaceDetail2() throws Exception {
+		 apiServiceImpl.getThemeBasicInfo();
+		 return "ok";
+	}
 }

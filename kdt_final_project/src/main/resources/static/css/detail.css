@@ -50,6 +50,12 @@ section #contents{
 	cursor: pointer;
 }
 .likeon{
+	display:block;
+	width: 2vw;
+	height: 2vw;
+	text-indent:-9999px;
+	background-size: cover;
+	cursor: pointer;
 	background-image: url("../img/like_on.png");
 }
 

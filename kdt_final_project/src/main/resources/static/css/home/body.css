@@ -28,10 +28,11 @@
 #recommend{
 	width: 66%; 
 	margin: 0 auto;
+	text-align:center;
 }
 .rmenu{
 	display: inline-box;
-	width:24%;
+	width:19.5%;
 }
 #top5{
 	width: 66%; 

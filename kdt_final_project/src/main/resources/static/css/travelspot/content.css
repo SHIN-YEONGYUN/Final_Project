@@ -261,7 +261,7 @@ width: 66%;
 }
 
 .themeItem-list { /*지역명 나열*/
-  width: 15vw;
+  width: 10vw;
   margin: 0 auto; /*행간 간격: 100px 조정*/
   height: 5vh;
 }

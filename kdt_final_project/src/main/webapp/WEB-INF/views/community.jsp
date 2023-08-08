@@ -75,7 +75,8 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${boardList}" var="board" varStatus="loop">
-    				<c:if test="${board.board_title == '여행기록' && !top10Ids.contains(board.id) && loop.index >= 10}">
+				<!-- && !top10Ids.contains(board.id) && loop.index >= 10} <-조건 삭제 -->
+    				<c:if test="${board.board_title == '여행기록'}">
         				<tr>
             				<td>${board.id}</td>
             				<td>${board.place}</td>

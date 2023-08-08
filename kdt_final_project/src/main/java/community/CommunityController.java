@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import User.LikesDTO;
 import User.UserDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -51,8 +50,8 @@ public class CommunityController {
 
 		model.addAttribute("boardList", boardList);
 
-		List<BoardDTO> top10List = boardService.getTop10Boards();
-		model.addAttribute("top10List", top10List);
+		//List<BoardDTO> top10List = boardService.getTop10Boards();
+		//model.addAttribute("top10List", top10List);
 
 		return "community";
 	}
@@ -272,8 +271,8 @@ public class CommunityController {
 			//response.put("likeStatus", "unliked");
 			response.put("isLoggedIn", false);
 		} else {
-			//LikesDTO like = likeService.getLikeByUserAndBoard(user.getId(), boardId);
 			response.put("isLoggedIn", true);
+			//LikesDTO like = likeService.getLikeByUserAndBoard(user.getId(), boardId);
 			//if (like == null || like.getLike_check() == 0) {
 			//	response.put("likeStatus", "unliked");
 			//} else {
@@ -284,45 +283,47 @@ public class CommunityController {
 	}
 
 	// 좋아요 버튼 클릭 시 처리
-	@GetMapping("/toggleLike")
-	@ResponseBody
-	public Map<String, Object> toggleLike(@RequestParam("boardId") int board_id, HttpServletRequest request) {
-		System.out.println("확인용: "+board_id );
-		UserDTO user = (UserDTO) request.getSession().getAttribute("user");
-		int user_id = user.getId();
-		System.out.println(user_id);
-		
-		Map<String, Object> response = new HashMap<>();
-		HashMap<String, Integer> param = new HashMap<>();
-		param.put("board_id", board_id);
-		param.put("user_id", user_id);
+		@GetMapping("/toggleLike")
+		@ResponseBody
+		public Map<String, Object> toggleLike(@RequestParam("boardId") int board_id, HttpServletRequest request) {
+			System.out.println("확인용: "+board_id );
+			UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+			int user_id = user.getId();
+			System.out.println(user_id);
+			
+			Map<String, Object> response = new HashMap<>();
+			//HashMap<String, Integer> param = new HashMap<>();
+			//param.put("board_id", board_id);
+			//param.put("user_id", user_id);
 
-		/* 로그인 여부 체크 불필요 -> getLikeStatus에서 이미 로그인 안되었을경우 로그인페이지로 강제이동시킴
-		if (user == null) {
-		 //로그인되어 있지 않은 경우
-		 response.put("isLoggedIn", false);
-		 } else {
-		 //로그인되어 있는 경우
-		 int userId = user.getId();
+
+				//LikesDTO like = likeService.getLikeByUserAndBoard(param);
+				LikeDTO like = likeService.getLikeByUserAndBoard(user_id, board_id);
+		        System.out.println("like = " + like);
+		        response.put("like", like);
+				if (like == null) {
+					// 해당 게시글에 좋아요를 누른 적이 없는 경우
+					response.put("likeStatus", "liked");
+					likeService.createLike(user_id, board_id);
+					likeService.increaseLikeCount(board_id); //추가한 부분
+				} else if(like.getLike_check() == 0) {
+					// 취소했다가 다시 좋아요를 누른 경우
+					response.put("likeStatus", "liked");
+					likeService.reLike(like);
+					likeService.increaseLikeCount(board_id);
+				}else if(like.getLike_check() == 1) {
+					// 이미 해당 게시글에 좋아요를 누른 경우
+					response.put("likeStatus", "unliked");
+					likeService.deleteLike(like);
+					likeService.decreaseLikeCount(board_id);
+				}
+				//좋아요수 response에 put하지 않았으므로 detail.jsp에서 response.likeCount 사용불가
+				//좋아요 수 쿼리 추가 후 response에 좋아요 수 넣기
+				response.put("likeCount", likeService.getLikesCount(board_id));
+				
+			return response;
 		}
-		*/
-			LikesDTO like = likeService.getLikeByUserAndBoard(param);
-			
-			if (like == null) {
-				// 해당 게시글에 좋아요를 누른 적이 없는 경우
-				likeService.createLike(user_id, board_id);
-				response.put("likeStatus", "liked");
-			} else {
-				// 이미 해당 게시글에 좋아요를 누른 경우
-				likeService.deleteLike(like);
-				response.put("likeStatus", "unliked");
-			}
-			//좋아요수 response에 put하지 않았으므로 detail.jsp에서 response.likeCount 사용불가
-			//좋아요 수 쿼리 추가 후 response에 좋아요 수 넣기
-			response.put("likeCount", likeService.getLikesCount(board_id));
-			
-		return response;
-	}
+
 
 	@RequestMapping("/board/report")
 	public ModelAndView ShowReport(int id, HttpSession session) {

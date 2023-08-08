@@ -18,8 +18,8 @@
 	<%@ include file="../home/header.jsp"%>
 
 	<%
-	String[] themes = new String[] { "alone", "couple", "friends", "family" };
-	String[] themeName = new String[] { "#혼자여행", "#힐링여행", "#캠핑여행", "#가족여행" };
+	String[] themes = new String[] { "alone", "couple", "friends", "family", "food" };
+	String[] themeName = new String[] { "#혼자", "#힐링", "#캠핑", "#가족","#먹거리" };
 	%>
 
 	<!-- 6개씩 배치-->

@@ -13,7 +13,7 @@
 <script src="/js/jquery-3.6.4.min.js"></script>
 <script src="/js/community/comment.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
 <%@ include file="../../views/home/header.jsp"%>
@@ -28,7 +28,7 @@
 			</div>
     		<span>${board.writer}</span>
     		<span>조회수: ${board.views}</span>
-    		<span>좋아요: ${board.likecount}</span>    
+    		<span>좋아요: ${board.likecount}</span>
     		<span>${board.writingtime}</span>
     	</div>
     <div class="buttons">
@@ -43,11 +43,20 @@
     	</c:choose>
     </div>
     </div>
-    <div id="contents">${board.contents}</div>
-    <a class="likebtn" onclick="checkLoginAndHandleLike(${board.id})">like button</a>
+    <div id="contents">${board.contents} :${like }:${like.like_check }</div>
+    <a id="likebtn" class="likebtn" onclick="checkLoginAndHandleLike(${board.id})">like button</a>
+    <!-- <c:choose>
+    	<c:when test="${like == null || like.like_check == 0}">
+    		<a class="likebtn" onclick="checkLoginAndHandleLike(${board.id})">like button</a>
+    	</c:when>
+    	<c:otherwise>
+    		<a class="likebtn likebtn_on" onclick="checkLoginAndHandleLike(${board.id})">like button</a>
+    	</c:otherwise>
+	</c:choose> -->
+    
     <span id="likeCount">${board.likecount}</span><br/>
     <script>
-    	/* const likebtn = document.querySelector(".likebtn");
+    	/*const likebtn = document.querySelector(".likebtn");
     	likebtn.addEventListener('click',function(){
     		this.classList.toggle("likeon");
     	}); */
@@ -64,7 +73,9 @@
                 success: function(response) {
                     if (response.isLoggedIn) {
                         // 로그인 상태인 경우 좋아요 처리 수행
+                        
                         toggleLike(boardId);
+                        location.reload();
                     } else {
                         // 로그인 상태가 아닌 경우 로그인 페이지로 이동
                         window.location.href = "/login";
@@ -76,6 +87,8 @@
             });
         }
 
+    	var likestatus = 0;
+    	var likeimgurl = "../img/like.png";
         // 좋아요 처리 함수
         function toggleLike(boardId) {
             $.ajax({
@@ -83,27 +96,42 @@
                 method: "GET",
                 data: {"boardId": boardId},
                 success: function(response) {
+                	if(response.like != null && response.like.like_check != 0){
+                		//$("#likebtn").css("background-image", "../img/like_on.png");
+                		$("#likebtn").removeClass("likebtn");
+                		$("#likebtn").addClass("likeon");
+                	}
                     // 성공적으로 처리되었을 때의 로직
                     // 예: 버튼 색 변경, 좋아요 수 갱신 등
-                    const likebtn = document.querySelector(".likebtn");
     				/* likebtn.addEventListener('click',function(){
     				this.classList.toggle("likeon");
-    				}); */
-                    
-                    if (response.likeStatus === "liked") {
-                        $("#likeButton").text("좋아요 취소");
+    				}); 
+                    const likebtn = document.querySelector(".likebtn");
+                    alert(response.likeStatus);
+                    if (response.likeStatus == "liked") {
+                        alert("좋아요 취소");
+                    	document.querySelector(".likebtn").classList.remove("likeon");
                     } else {
-                        $("#likeButton").text("좋아요");
-                        likebtn.classList.toggle("likeon");
-                    }
-                    $("#likeCount").text("좋아요 수: " + response.likeCount);
+                    	alert("좋아요");
+                        document.querySelector(".likebtn").classList.add("likeon");
+                    }*/
+                    $("#likeCount").text(/* "좋아요 수: " +  */response.likeCount);
+                    likestatus = response.like.like_check;
                     
                 },
-                error: function() {
-                    alert("서버와 통신 중 오류가 발생했습니다.");
+                error: function(request, status, err) {
+                    alert("서버와 통신 중 오류가 발생했습니다." + err +":" + request.responseText +":"+request.status);
                 }
-            });
+            });            
         }
+        
+        /* if(likestatus == 0 ){
+            likeimgurl = "../img/like.png";
+        }else{
+        	likeimgurl = "../img/like_on.png";
+        }
+        const likebtn = document.querySelector(".likebtn");
+        likebtn.style.backgroundImage = `${likeimgurl}`; */
 
     </script>
     

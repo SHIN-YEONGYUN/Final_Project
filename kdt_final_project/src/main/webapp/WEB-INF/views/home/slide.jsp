@@ -20,8 +20,8 @@
 				<a class="list">
 					<label for="slide02" class="left"></label>
 					<div class="textbox">
-						<p class="desc">여행의 즐거움을 더욱 완벽하게,<br>
-						당신의 행복한 여정을 함께합니다.<p>
+						<p class="desc">여행의 즐거움,<br>
+						행복한 여정을 함께합니다.<p>
 						<h3><a href="/travelspot/list">여행지 추천 바로가기</a></h3>
 					</div>
 					<img src="../img/Mainimg.png"></a>
@@ -33,7 +33,7 @@
 					<label for="slide01" class="left"></label>
 					<div class="textbox">
 						<p class="desc">당신의 경험을 공유하고<br>
-						최적의 여행지를 추천받으세요.<p>
+						여행지를 추천받으세요.<p>
 						<a href="/community"><h3>커뮤니티 바로가기</h3></a>
 					</div>
 					<img src="../img/Mainimage2.png">

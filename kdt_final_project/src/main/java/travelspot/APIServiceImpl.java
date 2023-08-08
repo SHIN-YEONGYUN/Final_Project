@@ -45,7 +45,7 @@ public class APIServiceImpl {
 		return "ok";
 	}
 	
-	@Scheduled(cron = "0 28 16 * * *")
+	//@Scheduled(cron = "0 28 16 * * *")
 	public void ScheduledTasksMethod() throws Exception { // place2, contents2 테이블에 데이터 저장 -> place, contents 테이블에 붙여넣기
 
 		// System.out.println("확인");
@@ -269,8 +269,6 @@ public class APIServiceImpl {
 		// "http://apis.data.go.kr/B551011/KorService1/areaBasedList1?numOfRows=12&pageNo=1&MobileOS=ETC&MobileApp=AppTest&ServiceKey="+serviceKey+"&listYN=Y&arrange=A&contentTypeId=&areaCode=&sigunguCode=&cat1=C01&cat2=C0112&cat3=C01120001";
 		String serviceKey = "gyesYtRw%2BO5TYGJgK%2FiI%2FFD6htVqBdnM8lz7Qp2noL4lQCWtcnA%2BWzJ9dWkBu0dMagfS1sVHzJi3Vn8CQaqM%2Fw%3D%3D";
 		String[] themeList = new String[] { "friends", "couple", "alone", "family" };
-		// String[] urlList = new String[] {friendUrl, coupleUrl, aloneUrl, familyUrl };
-		String[] numOfRowsList = new String[] { "20", "15", "15", "15" };
 		String[] cat2List = new String[] { "C0116", "C0114", "C0113", "C0112" };
 		String[] cat3List = new String[] { "C01160001", "C01140001", "C01130001", "C01120001" };
 
@@ -279,13 +277,10 @@ public class APIServiceImpl {
 
 			urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + serviceKey);
 			urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
-			urlBuilder.append(
-					"&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode(numOfRowsList[i], "UTF-8"));
+			urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("100", "UTF-8"));
 			urlBuilder.append("&" + URLEncoder.encode("MobileOS", "UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8"));
-			urlBuilder.append(
-					"&" + URLEncoder.encode("MobileApp", "UTF-8") + "=" + URLEncoder.encode("AppTest", "UTF-8"));
-			urlBuilder.append("&" + URLEncoder.encode("listYN", "UTF-8") + "=" + URLEncoder.encode("Y", "UTF-8"));
-			urlBuilder.append("&" + URLEncoder.encode("arrange", "UTF-8") + "=" + URLEncoder.encode("A", "UTF-8"));
+			urlBuilder.append("&" + URLEncoder.encode("MobileApp", "UTF-8") + "=" + URLEncoder.encode("AppTest", "UTF-8"));
+			urlBuilder.append("&" + URLEncoder.encode("arrange", "UTF-8") + "=" + URLEncoder.encode("O", "UTF-8"));
 			urlBuilder.append("&" + URLEncoder.encode("cat1", "UTF-8") + "=" + URLEncoder.encode("C01", "UTF-8"));
 			urlBuilder.append("&" + URLEncoder.encode("cat2", "UTF-8") + "=" + URLEncoder.encode(cat2List[i], "UTF-8"));
 			urlBuilder.append("&" + URLEncoder.encode("cat3", "UTF-8") + "=" + URLEncoder.encode(cat3List[i], "UTF-8"));

@@ -35,7 +35,6 @@
 <button id="saveButton" type="button" class="savebutton">저장</button>
 </div>
 </div>
-<%@ include file="../home/footer.jsp"%>
 
 <script>
 $(document).ready(function() {

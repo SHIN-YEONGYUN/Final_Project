@@ -70,7 +70,7 @@
             <div class="cloud"></div>
             </div>
    			</div>
-    <div style="float : right; margin-top : -10%;">
+    <div style="float : left; margin-top : -40%;">
         <div class="city" style="font-size : 13pt"></div>
         <div class="current_temp" style="font-size : 50pt"></div>
         <div class="weather_description" style="font-size : 20pt"></div>
